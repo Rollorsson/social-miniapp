@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
@@ -8,61 +9,29 @@
 }
 
 @plugin "daisyui" {
-  themes:
-    light,
-    dark --prefersdark;
-}
+  themes: {
+    mytheme: {
+      "primary": "#64748b",
+      "primary-content": "#f8fafc",
+      "secondary": "#f1f5f9",
+      "secondary-content": "#0f172a",
+      "accent": "#334155",
+      "accent-content": "#f8fafc",
+      "neutral": "#475569",
+      "neutral-content": "#f8fafc",
+      "base-100": "#ffffff",
+      "base-200": "#f8fafc",
+      "base-300": "#e2e8f0",
+      "base-content": "#0f172a",
+      "info": "#38bdf8",
+      "success": "#34d399",
+      "warning": "#facc15",
+      "error": "#f87171",
 
-@plugin "daisyui/theme" {
-  name: "light";
-
-  --color-primary: #93bbfb;
-  --color-primary-content: #212638;
-  --color-secondary: #dae8ff;
-  --color-secondary-content: #212638;
-  --color-accent: #93bbfb;
-  --color-accent-content: #212638;
-  --color-neutral: #212638;
-  --color-neutral-content: #ffffff;
-  --color-base-100: #ffffff;
-  --color-base-200: #f4f8ff;
-  --color-base-300: #dae8ff;
-  --color-base-content: #212638;
-  --color-info: #93bbfb;
-  --color-success: #34eeb6;
-  --color-warning: #ffcf72;
-  --color-error: #ff8863;
-
-  --radius-field: 9999rem;
-  --radius-box: 1rem;
-  --tt-tailw: 6px;
-}
-
-@plugin "daisyui/theme" {
-  name: "dark";
-
-  --color-primary: #212638;
-  --color-primary-content: #f9fbff;
-  --color-secondary: #323f61;
-  --color-secondary-content: #f9fbff;
-  --color-accent: #4969a6;
-  --color-accent-content: #f9fbff;
-  --color-neutral: #f9fbff;
-  --color-neutral-content: #385183;
-  --color-base-100: #385183;
-  --color-base-200: #2a3655;
-  --color-base-300: #212638;
-  --color-base-content: #f9fbff;
-  --color-info: #385183;
-  --color-success: #34eeb6;
-  --color-warning: #ffcf72;
-  --color-error: #ff8863;
-
-  --radius-field: 9999rem;
-  --radius-box: 1rem;
-
-  --tt-tailw: 6px;
-  --tt-bg: var(--color-primary);
+      "--rounded-box": "0.5rem",
+      "--rounded-btn": "0.5rem",
+    },
+  };
 }
 
 /*
@@ -88,6 +57,7 @@
 
   body {
     min-height: 100vh;
+    font-family: "Inter", sans-serif;
   }
 
   h1,
@@ -96,6 +66,7 @@
   h4 {
     margin-bottom: 0.5rem;
     line-height: 1;
+    font-weight: 600;
   }
 }
 
