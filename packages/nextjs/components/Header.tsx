@@ -27,6 +27,14 @@ export const menuLinks: HeaderMenuLink[] = [
     href: "/leaderboard",
   },
   {
+    label: "Profile",
+    href: "/profile",
+  },
+  {
+    label: "Safe",
+    href: "/safe",
+  },
+  {
     label: "Chat",
     href: "/chat",
   },

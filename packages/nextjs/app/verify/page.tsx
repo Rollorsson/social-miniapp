@@ -1,7 +1,7 @@
 "use client";
 
 import { SelfId } from "~~/components/bubble/SelfId";
-// import { WorldId } from "~~/components/bubble/WorldId";
+import { WorldId } from "~~/components/bubble/WorldId";
 
 const VerifyPage = () => {
   return (
@@ -16,7 +16,7 @@ const VerifyPage = () => {
             <h2 className="text-2xl font-bold">Step 1: World ID</h2>
             <p className="mt-2">Prove you are a unique person.</p>
             <div className="mt-4">
-              {/* <WorldId /> */}
+              <WorldId />
             </div>
           </div>
           <div className="p-6 border rounded-xl">

@@ -11,6 +11,8 @@ import { Footer } from "~~/components/Footer";
 import { Header } from "~~/components/Header";
 import { BlockieAvatar } from "~~/components/scaffold-eth";
 import { wagmiConfig } from "~~/services/web3/wagmiConfig";
+import ProgressBar from "next-nprogress-bar";
+import { IdentityProvider } from "~~/context/IdentityContext";
 
 const ScaffoldEthApp = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -50,7 +52,9 @@ export const ScaffoldEthAppWithProviders = ({ children }: { children: React.Reac
           avatar={BlockieAvatar}
           theme={mounted ? (isDarkMode ? darkTheme() : lightTheme()) : lightTheme()}
         >
-          <ScaffoldEthApp>{children}</ScaffoldEthApp>
+          <IdentityProvider>
+            <ScaffoldEthApp>{children}</ScaffoldEthApp>
+          </IdentityProvider>
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
