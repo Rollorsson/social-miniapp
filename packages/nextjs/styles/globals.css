@@ -8,7 +8,7 @@
   --animate-pulse-fast: pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-@plugin "daisyui" {
+/* @plugin "daisyui" {
   themes: {
     mytheme: {
       "primary": "#64748b",
@@ -27,12 +27,11 @@
       "success": "#34d399",
       "warning": "#facc15",
       "error": "#f87171",
-
       "--rounded-box": "0.5rem",
-      "--rounded-btn": "0.5rem",
-    },
-  };
-}
+      "--rounded-btn": "0.5rem"
+    }
+  }
+} */
 
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
