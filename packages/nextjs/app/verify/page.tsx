@@ -1,73 +1,55 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
+import { IDKitWidget, ISuccessResult } from "@worldcoin/idkit";
 import type { NextPage } from "next";
-import { useAccount } from "wagmi";
-import toast from "react-hot-toast";
-import { useScaffoldWriteContract, useScaffoldReadContract } from "~~/hooks/scaffold-eth";
-import { useSelf } from "~~/hooks/useSelf";
 
 const Verify: NextPage = () => {
-  const { address } = useAccount();
-  const { verifyWithSelf } = useSelf();
-  const [isLoading, setIsLoading] = useState(false);
-
-  const { data: isVerified } = useScaffoldReadContract({
-    contractName: "ChallengeRewards",
-    functionName: "isVerified",
-    args: [address],
-  });
-
-  const { writeContractAsync: verifyUser } = useScaffoldWriteContract("ChallengeRewards");
-
-  const handleVerify = async () => {
-    setIsLoading(true);
-    try {
-      const selfVerified = await verifyWithSelf();
-      if (selfVerified) {
-        await verifyUser({
-          functionName: "verifyUser",
-        });
-        toast.success("Verification successful!");
-      } else {
-        toast.error("Self Protocol verification failed.");
-      }
-    } catch (e) {
-      console.error("Error verifying user:", e);
-      toast.error("An error occurred during verification.");
-    } finally {
-      setIsLoading(false);
+  const handleProof = async (result: ISuccessResult) => {
+    console.log("Proof received from IDKit:\n", result);
+    const res = await fetch("/api/verify", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ proof: result }),
+    });
+    if (!res.ok) {
+      throw new Error("Verification failed.");
     }
+    console.log("Successfully verified proof.");
+  };
+
+  const onSuccess = (result: ISuccessResult) => {
+    console.log("Success!", result);
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <h1 className="text-5xl font-bold">
-          Verify Your Identity
+    <div className="flex items-center flex-col flex-grow pt-10">
+      <div className="px-5">
+        <h1 className="text-center">
+          <span className="block text-2xl mb-2">Verify Your Identity</span>
+          <span className="block text-4xl font-bold">with World ID</span>
         </h1>
-        <p className="mt-4 text-xl text-neutral-content">
-          Prove you are a unique person to join our community.
-        </p>
+        <p className="text-center text-lg">Prove you are a unique human without revealing your identity.</p>
+      </div>
 
-        <div className="mt-8">
-          {isVerified ? (
-            <p className="text-2xl text-success">You are already verified!</p>
-          ) : (
-            <button
-              onClick={handleVerify}
-              className="btn btn-primary btn-lg"
-              disabled={isLoading}
-            >
-              {isLoading ? (
-                <span className="loading loading-spinner"></span>
-              ) : (
-                "Verify with Self Protocol"
-              )}
-            </button>
-          )}
+      <div className="flex-grow bg-base-300 w-full mt-16 px-8 py-12">
+        <div className="flex justify-center items-center gap-12 flex-col sm:flex-row">
+          <IDKitWidget
+            action="my_action"
+            onSuccess={onSuccess}
+            handleVerify={handleProof}
+            app_id="app_staging_abc123" // TODO: Replace with your App ID
+          >
+            {({ open }) => (
+              <button className="btn btn-primary" onClick={open}>
+                Verify with World ID
+              </button>
+            )}
+          </IDKitWidget>
         </div>
-      </main>
+      </div>
     </div>
   );
 };

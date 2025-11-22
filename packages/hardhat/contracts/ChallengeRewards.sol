@@ -1,7 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import "hardhat/console.sol";
+
 contract ChallengeRewards {
+    address public owner;
+
     // Mapping from user address to their verification status
     mapping(address => bool) private _verifiedUsers;
     // Mapping from user address to their reward balance
@@ -12,18 +16,28 @@ contract ChallengeRewards {
     // Event emitted when a user is verified
     event UserVerified(address indexed user);
 
+    constructor() {
+        owner = msg.sender;
+        console.log("ChallengeRewards deployed, owner set to:", owner);
+    }
+
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Only owner can call this function");
+        _;
+    }
+
     /**
-     * @dev Verifies the caller and grants them an initial reward.
-     * The caller must not already be verified.
+     * @dev Verifies a user and grants them an initial reward. Only callable by the owner.
+     * The user must not already be verified.
      */
-    function verifyUser() external {
-        require(!_verifiedUsers[msg.sender], "User already verified");
+    function verifyUser(address user) external onlyOwner {
+        require(!_verifiedUsers[user], "User already verified");
 
-        _verifiedUsers[msg.sender] = true;
-        _rewards[msg.sender] = 100; // Initial reward
-        _verifiedUserAddresses.push(msg.sender);
+        _verifiedUsers[user] = true;
+        _rewards[user] = 100; // Initial reward
+        _verifiedUserAddresses.push(user);
 
-        emit UserVerified(msg.sender);
+        emit UserVerified(user);
     }
 
     /**
