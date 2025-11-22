@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from "react";
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
 import toast from "react-hot-toast";
-import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 import { useXMTP } from "~~/hooks/useXMTP";
 import { Address } from "~~/components/scaffold-eth";
 
@@ -16,10 +15,8 @@ const Chat: NextPage = () => {
   const { address: connectedAddress } = useAccount();
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const { data: verifiedUsers, isLoading: isLoadingUsers } = useScaffoldReadContract({
-    contractName: "ChallengeRewards",
-    functionName: "getVerifiedUsers",
-  });
+  // TODO: Replace with a proper user discovery mechanism
+  const { data: verifiedUsers, isLoading: isLoadingUsers } = { data: [], isLoading: false };
 
   useEffect(() => {
     if (selectedUser) {

@@ -23,10 +23,6 @@ export const menuLinks: HeaderMenuLink[] = [
     href: "/verify",
   },
   {
-    label: "Leaderboard",
-    href: "/leaderboard",
-  },
-  {
     label: "Profile",
     href: "/profile",
   },

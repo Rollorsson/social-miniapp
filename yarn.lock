@@ -4097,6 +4097,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@peculiar/asn1-schema@npm:^2.3.13":
+  version: 2.6.0
+  resolution: "@peculiar/asn1-schema@npm:2.6.0"
+  dependencies:
+    asn1js: ^3.0.6
+    pvtsutils: ^1.3.6
+    tslib: ^2.8.1
+  checksum: 1d34d209b8db50ca1431060445fec9ab629d2decc3bcf161847877279c677ac8aa7794a7306950b63dd7535a91611df5464e4721ddb39a2f4c1109bd9a9fff73
+  languageName: node
+  linkType: hard
+
 "@perma/map@npm:^1.0.2":
   version: 1.0.3
   resolution: "@perma/map@npm:1.0.3"
@@ -4718,6 +4729,39 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@safe-global/api-kit@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "@safe-global/api-kit@npm:4.0.1"
+  dependencies:
+    "@safe-global/protocol-kit": ^6.1.2
+    "@safe-global/types-kit": ^3.0.0
+    node-fetch: ^2.7.0
+    viem: ^2.21.8
+  checksum: f90d8939fbac4e4887576d66b61c3b24656b51816092c5a5c3b914b0d4ed6bed5475f1f2cf284696dfcfbb44740b93a23a4d8e1ccf4dc6a6f78779ea382ed351
+  languageName: node
+  linkType: hard
+
+"@safe-global/protocol-kit@npm:^6.1.2":
+  version: 6.1.2
+  resolution: "@safe-global/protocol-kit@npm:6.1.2"
+  dependencies:
+    "@noble/curves": ^1.6.0
+    "@peculiar/asn1-schema": ^2.3.13
+    "@safe-global/safe-deployments": ^1.37.49
+    "@safe-global/safe-modules-deployments": ^2.2.21
+    "@safe-global/types-kit": ^3.0.0
+    abitype: ^1.0.2
+    semver: ^7.7.2
+    viem: ^2.21.8
+  dependenciesMeta:
+    "@noble/curves":
+      optional: true
+    "@peculiar/asn1-schema":
+      optional: true
+  checksum: d6dfa653676e9486ac104c95b8b69fdc7d66c53a875263d0181136767e34c0e4c40500b093a2ad77672b1e2497e36f44da334eccbfd81cb12fd1a7b39ed7ee3d
+  languageName: node
+  linkType: hard
+
 "@safe-global/safe-apps-provider@npm:0.18.6":
   version: 0.18.6
   resolution: "@safe-global/safe-apps-provider@npm:0.18.6"
@@ -4778,7 +4822,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@safe-global/safe-deployments@npm:^1.20.2, @safe-global/safe-deployments@npm:^1.25.0":
+"@safe-global/safe-deployments@npm:^1.20.2, @safe-global/safe-deployments@npm:^1.25.0, @safe-global/safe-deployments@npm:^1.37.49":
   version: 1.37.49
   resolution: "@safe-global/safe-deployments@npm:1.37.49"
   dependencies:
@@ -4805,6 +4849,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@safe-global/safe-modules-deployments@npm:^2.2.21":
+  version: 2.2.21
+  resolution: "@safe-global/safe-modules-deployments@npm:2.2.21"
+  checksum: 967fd772a27242bea089c07ab98f963551474967ff087d1a9e385909e05db572515969fd21a6965ddd50ee1018f9229d26516069809400eb11c7c4663293f9db
+  languageName: node
+  linkType: hard
+
 "@safe-global/safe-service-client@npm:^2.0.3":
   version: 2.0.3
   resolution: "@safe-global/safe-service-client@npm:2.0.3"
@@ -4813,6 +4864,15 @@ __metadata:
     "@safe-global/safe-core-sdk-types": ^1.9.2
     node-fetch: ^2.6.6
   checksum: 10b14307c75b184d7a62345109845d5d2e223d221e8cd6961dcc49b3453b1721cce3c04f728f5ee271353615250a9dd8d15ac3c843177f687dbb065a1c099b07
+  languageName: node
+  linkType: hard
+
+"@safe-global/types-kit@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@safe-global/types-kit@npm:3.0.0"
+  dependencies:
+    abitype: ^1.0.2
+  checksum: 02f868e8a2de0681c637ed853473766468a4e4b9ee024c3d807b72bf0cbd3555593d88711c0ebd7b0cee159e8d61320542d659dd291cbff0829a2466b5b6fa3f
   languageName: node
   linkType: hard
 
@@ -5069,6 +5129,8 @@ __metadata:
   dependencies:
     "@heroicons/react": ^2.1.5
     "@rainbow-me/rainbowkit": 2.2.8
+    "@safe-global/api-kit": ^4.0.1
+    "@safe-global/protocol-kit": ^6.1.2
     "@safe-global/safe-core-sdk": ^3.3.5
     "@safe-global/safe-ethers-lib": ^1.9.4
     "@safe-global/safe-service-client": ^2.0.3
@@ -5111,7 +5173,7 @@ __metadata:
     typescript: ^5.8.2
     usehooks-ts: ^3.1.0
     vercel: ^39.1.3
-    viem: ^2.0.0
+    viem: ^2.39.3
     wagmi: 2.16.4
     zustand: ^5.0.0
   languageName: unknown
@@ -7880,6 +7942,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"abitype@npm:^1.0.2, abitype@npm:^1.0.9":
+  version: 1.2.0
+  resolution: "abitype@npm:1.2.0"
+  peerDependencies:
+    typescript: ">=5.0.4"
+    zod: ^3.22.0 || ^4.0.0
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+    zod:
+      optional: true
+  checksum: e6a45bfa8436d5d12b996ce87e445114b0e50a4d725a6c0057939d8734af752ee2cfb96da11126a33c337c77a0c847bdbad502022727f8a8533f892bad2a8088
+  languageName: node
+  linkType: hard
+
 "abitype@npm:^1.0.8":
   version: 1.0.9
   resolution: "abitype@npm:1.0.9"
@@ -7892,21 +7969,6 @@ __metadata:
     zod:
       optional: true
   checksum: de56b97611f0dc6c842411c242344802456b2dd07202568bfdebea946d21a277e9d30a3ed62990e6e4ef85d7bd31d689baa3370250454046cc24aabe2178073a
-  languageName: node
-  linkType: hard
-
-"abitype@npm:^1.0.9":
-  version: 1.2.0
-  resolution: "abitype@npm:1.2.0"
-  peerDependencies:
-    typescript: ">=5.0.4"
-    zod: ^3.22.0 || ^4.0.0
-  peerDependenciesMeta:
-    typescript:
-      optional: true
-    zod:
-      optional: true
-  checksum: e6a45bfa8436d5d12b996ce87e445114b0e50a4d725a6c0057939d8734af752ee2cfb96da11126a33c337c77a0c847bdbad502022727f8a8533f892bad2a8088
   languageName: node
   linkType: hard
 
@@ -8442,6 +8504,17 @@ __metadata:
     pvutils: ^1.1.3
     tslib: ^2.4.0
   checksum: 3b6af1bbadd5762ef8ead5daf2f6bda1bc9e23bc825c4dcc996aa1f9521ad7390a64028565d95d98090d69c8431f004c71cccb866004759169d7c203cf9075eb
+  languageName: node
+  linkType: hard
+
+"asn1js@npm:^3.0.6":
+  version: 3.0.6
+  resolution: "asn1js@npm:3.0.6"
+  dependencies:
+    pvtsutils: ^1.3.6
+    pvutils: ^1.1.3
+    tslib: ^2.8.1
+  checksum: 2b43a4c7964183cc2c6b45d7f757eeeb93d2c60e89250dae2826250580e2049a43a795af6ab6d8eb6cbb13c8f51674a430923b2981313c64503b7159e378b477
   languageName: node
   linkType: hard
 
@@ -17866,7 +17939,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pvtsutils@npm:^1.3.2":
+"pvtsutils@npm:^1.3.2, pvtsutils@npm:^1.3.6":
   version: 1.3.6
   resolution: "pvtsutils@npm:1.3.6"
   dependencies:
@@ -18841,7 +18914,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:^7.6.2":
+"semver@npm:^7.6.2, semver@npm:^7.7.2":
   version: 7.7.3
   resolution: "semver@npm:7.7.3"
   bin:
@@ -21136,27 +21209,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"viem@npm:^2.0.0":
-  version: 2.39.3
-  resolution: "viem@npm:2.39.3"
-  dependencies:
-    "@noble/curves": 1.9.1
-    "@noble/hashes": 1.8.0
-    "@scure/bip32": 1.7.0
-    "@scure/bip39": 1.6.0
-    abitype: 1.1.0
-    isows: 1.0.7
-    ox: 0.9.6
-    ws: 8.18.3
-  peerDependencies:
-    typescript: ">=5.0.4"
-  peerDependenciesMeta:
-    typescript:
-      optional: true
-  checksum: 8068468169e4081481f2a4b1fec9d971a6f96089e8bfa4f8bca12bfe9da14a09dc9ec605e2a957df8d16be97d5a9ede6d33dd5ea23d1a723257e9626d3234828
-  languageName: node
-  linkType: hard
-
 "viem@npm:^2.1.1":
   version: 2.30.0
   resolution: "viem@npm:2.30.0"
@@ -21175,6 +21227,27 @@ __metadata:
     typescript:
       optional: true
   checksum: 9aa5dc37e20ed5f018bbeebbc2cfebd844ec06e97a90a4ea6e6604fda1ea930f791c5dab71ce2acb177c0a560be4a9b6d8aa530fa6d15627accf5a661a41f14b
+  languageName: node
+  linkType: hard
+
+"viem@npm:^2.21.8, viem@npm:^2.39.3":
+  version: 2.39.3
+  resolution: "viem@npm:2.39.3"
+  dependencies:
+    "@noble/curves": 1.9.1
+    "@noble/hashes": 1.8.0
+    "@scure/bip32": 1.7.0
+    "@scure/bip39": 1.6.0
+    abitype: 1.1.0
+    isows: 1.0.7
+    ox: 0.9.6
+    ws: 8.18.3
+  peerDependencies:
+    typescript: ">=5.0.4"
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 8068468169e4081481f2a4b1fec9d971a6f96089e8bfa4f8bca12bfe9da14a09dc9ec605e2a957df8d16be97d5a9ede6d33dd5ea23d1a723257e9626d3234828
   languageName: node
   linkType: hard
 

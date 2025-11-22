@@ -18,6 +18,8 @@
   "dependencies": {
     "@heroicons/react": "^2.1.5",
     "@rainbow-me/rainbowkit": "2.2.8",
+    "@safe-global/api-kit": "^4.0.1",
+    "@safe-global/protocol-kit": "^6.1.2",
     "@safe-global/safe-core-sdk": "^3.3.5",
     "@safe-global/safe-ethers-lib": "^1.9.4",
     "@safe-global/safe-service-client": "^2.0.3",
@@ -44,7 +46,7 @@
     "react-hot-toast": "^2.4.0",
     "tailwind-merge": "^3.4.0",
     "usehooks-ts": "^3.1.0",
-    "viem": "^2.0.0",
+    "viem": "^2.39.3",
     "wagmi": "2.16.4",
     "zustand": "^5.0.0"
   },

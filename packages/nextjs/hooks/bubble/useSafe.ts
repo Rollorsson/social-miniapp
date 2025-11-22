@@ -1,15 +1,31 @@
 import { useState, useEffect, useCallback } from "react";
-import { useAccount, useChainId, useWalletClient } from "wagmi";
-import { ethers } from "ethers";
-import Safe, { EthersAdapter } from "@safe-global/protocol-kit";
+import { useAccount, useChainId, useWalletClient, type WalletClient } from "wagmi";
+import { BrowserProvider } from "ethers";
+import ProtocolKit from "@safe-global/protocol-kit";
 import SafeApiKit from "@safe-global/api-kit";
+import { EthersAdapter } from "@safe-global/safe-ethers-lib";
+
+// Helper function to convert wagmi WalletClient to ethers Signer
+export function walletClientToSigner(walletClient: WalletClient) {
+  const { account, chain, transport } = walletClient;
+  if (!account || !chain || !transport) return;
+
+  const network = {
+    chainId: chain.id,
+    name: chain.name,
+    ensAddress: chain.contracts?.ensRegistry?.address,
+  };
+  const provider = new BrowserProvider(transport, network);
+  const signer = provider.getSigner(account.address);
+  return signer;
+}
 
 const useSafe = () => {
   const { address: connectedAddress } = useAccount();
   const chainId = useChainId();
   const { data: walletClient } = useWalletClient();
 
-  const [safe, setSafe] = useState<Safe | null>(null);
+  const [safe, setSafe] = useState<ProtocolKit | null>(null);
   const [safeAddress, setSafeAddress] = useState<string | null>(null);
   const [isSafeDeployed, setIsSafeDeployed] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -28,12 +44,22 @@ const useSafe = () => {
 
   // Check for existing safes
   const checkForExistingSafe = useCallback(async () => {
-    if (!connectedAddress) return;
+    if (!connectedAddress || !walletClient) return;
     setLoading(true);
     try {
+      const signer = walletClientToSigner(walletClient);
+      if (!signer) {
+        setLoading(false);
+        return;
+      }
+      const ethAdapter = new EthersAdapter({
+        ethers: BrowserProvider,
+        signerOrProvider: signer,
+      });
+
       const safeService = new SafeApiKit({
         txServiceUrl: getSafeServiceUrl(),
-        ethAdapter: new EthersAdapter({ ethers, signerOrProvider: walletClient }),
+        ethAdapter,
       });
       const safes = await safeService.getSafesByOwner(connectedAddress);
       if (safes.safes.length > 0) {
@@ -50,18 +76,23 @@ const useSafe = () => {
       console.error("Error checking for existing safe:", error);
     }
     setLoading(false);
-  }, [connectedAddress, walletClient, chainId]);
+  }, [connectedAddress, walletClient, chainId, getSafeServiceUrl]);
 
   // Deploy a new 1-of-1 Safe
   const deployNewSafe = useCallback(async () => {
     if (!walletClient || !connectedAddress) return;
     setLoading(true);
     try {
+      const signer = walletClientToSigner(walletClient);
+      if (!signer) {
+        setLoading(false);
+        return;
+      }
       const ethAdapter = new EthersAdapter({
-        ethers,
-        signerOrProvider: walletClient,
+        ethers: BrowserProvider,
+        signerOrProvider: signer,
       });
-      const safeFactory = await Safe.create({ ethAdapter });
+      const safeFactory = await ProtocolKit.create({ ethAdapter });
       const safeAccountConfig = {
         owners: [connectedAddress],
         threshold: 1,

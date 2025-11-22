@@ -11,7 +11,7 @@ import { Footer } from "~~/components/Footer";
 import { Header } from "~~/components/Header";
 import { BlockieAvatar } from "~~/components/scaffold-eth";
 import { wagmiConfig } from "~~/services/web3/wagmiConfig";
-import ProgressBar from "next-nprogress-bar";
+import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
 import { IdentityProvider } from "~~/context/IdentityContext";
 
 const ScaffoldEthApp = ({ children }: { children: React.ReactNode }) => {
