@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 import { Client } from "@xmtp/xmtp-js";
 import { useWalletClient } from "wagmi";
+import { walletClientToSigner } from "~~/hooks/useEthersSigner";
 
 export const XmtpChat = () => {
   const { address } = useAccount();
@@ -18,8 +19,11 @@ export const XmtpChat = () => {
     const initXmtp = async () => {
       if (walletClient && !xmtp) {
         try {
-          const xmtpClient = await Client.create(walletClient, { env: "dev" });
-          setXmtp(xmtpClient);
+          const signer = await walletClientToSigner(walletClient);
+          if (signer) {
+            const xmtpClient = await Client.create(signer, { env: "dev" });
+            setXmtp(xmtpClient);
+          }
         } catch (e) {
           console.error(e);
         }
